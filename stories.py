@@ -1,6 +1,5 @@
 import tornado.ioloop
 import tornado.web
-import random
 import json
 from pymongo import MongoClient
 
