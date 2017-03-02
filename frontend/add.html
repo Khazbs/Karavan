@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Онлайн-издание "Караван"</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <style type="text/css">
+            .i-heading {
+                margin-top: 0em;
+                margin-bottom: 0em;
+            }
+            .linebreaks {
+                white-space: pre-line;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </head>
+    <body class="w3-black">
+        <script>
+            function persSubmit() {
+                let data = $('#pers-input').val();
+                let author = $('#author-input').val();
+                let error = false;
+                if (author == "") {
+                    document.getElementById("author-comment").innerHTML = "Кто вы?"
+                    document.getElementById("pers-comment").innerHTML = "Вы забыли указать авторство."
+                    error = true;
+                }
+                else document.getElementById("author-comment").innerHTML = ""
+                if (data == "") {
+                    document.getElementById("pers-comment").innerHTML = "Вы не можете добавить пустого персонажа."
+                    error = true;
+                }
+                if (error) return;
+                document.getElementById("pers-comment").innerHTML = "Пожалуйста, подождите, пока " + data + " загружается на сервер..."
+                $.ajax({
+                    type: "POST",
+                    url: '/api/push/characters',
+                    data: {value: data, author: author},
+                    success: function() {
+                        document.getElementById("pers-comment").innerHTML = "Поздравляем, " + data + " успешно добавлен в список персонажей."
+                        document.getElementById("pers-input").innerHTML = ""
+                    },
+                    error: function() {
+                        document.getElementById("pers-comment").innerHTML = "Произошла ошибка, и " + data + " не был добавлен в список персонажей. Попробуйте еще раз."
+                    }
+                });
+            }
+            function objsSubmit() {
+                let data = $('#objs-input').val();
+                let author = $('#author-input').val();
+                let error = false;
+                if (author == "") {
+                    document.getElementById("author-comment").innerHTML = "Кто вы?"
+                    document.getElementById("objs-comment").innerHTML = "Вы забыли указать авторство."
+                    error = true;
+                }
+                else document.getElementById("author-comment").innerHTML = ""
+                if (data == "") {
+                    document.getElementById("objs-comment").innerHTML = "Вы не можете добавить пустой предмет."
+                    error = true;
+                }
+                if (error) return;
+                document.getElementById("objs-comment").innerHTML = "Пожалуйста, подождите, пока мы загружаем " + data + " на сервер..."
+                $.ajax({
+                    type: "POST",
+                    url: '/api/push/objects',
+                    data: {value: data, author: author},
+                    success: function() {
+                        document.getElementById("objs-comment").innerHTML = "Поздравляем, вы успешно добавили " + data + " в список предметов."
+                        document.getElementById("objs-input").innerHTML = ""
+                    },
+                    error: function() {
+                        document.getElementById("objs-comment").innerHTML = "Произошла ошибка, и добавить " + data + " в список предметов не удалось. Попробуйте еще раз."
+                    }
+                });
+            }
+            function storiesSubmit() {
+                let data = $('#stories-input').val();
+                let author = $('#author-input').val();
+                let error = false;
+                if (author == "") {
+                    document.getElementById("author-comment").innerHTML = "Кто вы?"
+                    document.getElementById("stories-comment").innerHTML = "Вы забыли указать авторство."
+                    error = true;
+                }
+                else document.getElementById("author-comment").innerHTML = ""
+                if (data == "") {
+                    document.getElementById("stories-comment").innerHTML = "Вы не можете добавить пустую историю."
+                    error = true;
+                }
+                if (error) return;
+                document.getElementById("stories-comment").innerHTML = "Пожалуйста, подождите, пока мы загружаем вашу историю на сервер..."
+                $.ajax({
+                    type: "POST",
+                    url: '/api/push/stories',
+                    data: {value: data, author: author},
+                    success: function() {
+                        document.getElementById("stories-comment").innerHTML = "Поздравляем, ваша история была успешно добавлена."
+                        document.getElementById("stories-input").innerHTML = ""
+                    },
+                    error: function() {
+                        document.getElementById("stories-comment").innerHTML = "Произошла ошибка, и ваша история не была добавлена. Попробуйте еще раз."
+                    }
+                });
+            }
+        </script>
+        <div>
+            <div style="display: inline-block;">
+                <h2><img id="epifan-logo" height="90" src="/misc/epifan.png" /></h2>
+            </div>
+            <div class="w3-container" style="display: inline-block;">
+                <h2 class="i-heading">Онлайн-издание "Караван"</h2>
+                <h4 class="i-heading">Караван офигительных историй на каждый день</h4>
+            </div>
+        </div>
+        <div class="w3-container">
+            <a class="w3-btn w3-white" href="{{root_loc}}/">Трави!</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/add/">Добавить свой контент</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/api/">Открытый API</a></button>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Указать авторство</h4>
+            <textarea id="author-input" class="w3-input"></textarea>
+            <p id="author-comment"></p>
+            <br>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Добавить персонажа</h4>
+            <p>Чтобы название вашего персонажа соответствовало всем стилям и канонам, пишите имена нарицательные со строчной буквы, а собственные - с заглавной. Желательно использовать персонажей мужского рода в именительном падеже, например: <i>поручик Ржевский, студент, Альберт Эйнштейн</i>.</p>
+            <textarea id="pers-input" class="w3-input"></textarea>
+            <p id="pers-comment"></p>
+            <button onclick="persSubmit()" class="w3-btn w3-black">Добавить</button><br>
+            <br>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Добавить предмет</h4>
+            <p>Чтобы название вашего предмета соответствовало всем стилям и канонам, пишите имена нарицательные со строчной буквы, а собственные - с заглавной. Желательно использовать предметы женского рода в винительном падеже, например: <i>горящую машину, свинью, бутылку Клейна</i>.</p>
+            <textarea id="objs-input" class="w3-input"></textarea>
+            <p id="objs-comment"></p>
+            <button onclick="objsSubmit()" class="w3-btn w3-black">Добавить</button><br>
+            <br>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Добавить историю</h4>
+            <p>Чтобы шаблон вашей истории соответствовал всем стилям и канонам, соблюдайте как можно больше правил русского языка. Используйте трафареты <i>{pers}, {pers1}, ... {pers9}</i> для вставки в историю персонажей, а также трафареты <i>{obj}, {obj1}, ... {obj9}</i> для вставки в историю предметов, например: <i>Если {pers1} будет долго смотреть на {obj1}, то придет {pers2}, достанет свою {obj2} и долбанет его ей по башке.</i></p>
+            <textarea id="stories-input" class="w3-input"></textarea>
+            <p id="stories-comment"></p>
+            <button onclick="storiesSubmit()" class="w3-btn w3-black">Добавить</button><br>
+            <br>
+        </div>
+        <footer class="w3-container">
+            <p>by <a href="http://vk.com/arthur_khazbs" target="_blank">Arthur Khazbs</a></p>
+        </footer>
+    </body>
+</html>

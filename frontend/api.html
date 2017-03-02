@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Онлайн-издание "Караван"</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <style type="text/css">
+            .i-heading {
+                margin-top: 0em;
+                margin-bottom: 0em;
+            }
+            .linebreaks {
+                white-space: pre-line;
+            }
+        </style>
+    </head>
+    <body class="w3-black">
+        <div>
+            <div style="display: inline-block;">
+                <h2><img id="epifan-logo" height="90" src="/misc/epifan.png" /></h2>
+            </div>
+            <div class="w3-container" style="display: inline-block;">
+                <h2 class="i-heading">Онлайн-издание "Караван"</h2>
+                <h4 class="i-heading">Караван офигительных историй на каждый день</h4>
+            </div>
+        </div>
+        <div class="w3-container">
+            <a class="w3-btn w3-white" href="{{root_loc}}/">Трави!</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/add/">Добавить свой контент</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/api/">Открытый API</a></button>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Открытый API "Каравана"</h4>
+            <p>
+                "Караван" имеет няшный и минималистичный открытый API. API возвращает данные в формате JSON-документов. С методами API вы можете ознакомиться на этой странице. Чтобы обратиться к API, необходимо отправить GET или POST (материалы большой длины рекомендуется передавать через POST) запрос по адресу: {{root_loc}}/api/<метод>. При попытке обратиться к несуществующему методу будет получен ответ со статусом "WhereAmI?".
+            </p>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Метод pull</h4>
+            <p>
+                Метод pull используется для того, чтобы получить сгенерированную историю.<br>
+                <u>Параметры метода:</u> нет<br>
+                <u>Возвращаемые данные:</u><br>
+                - "status" - статус обработки вашего запроса: "Ok" (успешно), "DefectiveDatabase" (ошибка сервера, связанная с повреждением базы данных)<br>
+                - "text" <i>(в случае успешной обработки запроса)</i> - текст сгенерированной истории
+            </p>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <h4>Метод push</h4>
+            <p>
+                Метод push используется для того, чтобы добавлять материалы для генерации историй в базу данных.<br>
+                Метод push делится на три подметода: push/characters (добавить персонажей), push/objects (добавить предметы), push/stories (добавить истории)<br>
+                <u>Параметры метода:</u><br>
+                - "author" <i>(обязательный)</i> - автор добавляемого материала<br>
+                - "value" <i>(обязательный)</i> - добавляемый текстовый материал<br>
+                <u>Возвращаемые данные:</u><br>
+                - "status" - статус обработки вашего запроса: "Ok" (успешно), "MissingArguments" (ошибка клиента, возникающая при непередаче обязательных параметров), "BadTemplate" (ошибка клиента, возникающая при передаче поврежденного шаблона истории)<br>
+                - "author" <i>(в случае успешной обработки запроса)</i> - автор добавляемого материала<br>
+                - "value" <i>(в случае успешной обработки запроса)</i> - добавляемый текстовый материал<br>
+            </p>
+        </div>
+        <footer class="w3-container">
+            <p>by <a href="http://vk.com/arthur_khazbs" target="_blank">Arthur Khazbs</a></p>
+        </footer>
+    </body>
+</html>

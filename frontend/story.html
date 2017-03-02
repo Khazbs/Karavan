@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Онлайн-издание "Караван"</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <style type="text/css">
+            .i-heading {
+                margin-top: 0em;
+                margin-bottom: 0em;
+            }
+            .linebreaks {
+                white-space: pre-line;
+            }
+        </style>
+    </head>
+    <body class="w3-black">
+        <div>
+            <div style="display: inline-block;">
+                <h2><img id="epifan-logo" height="90" src="/misc/epifan.png" /></h2>
+            </div>
+            <div class="w3-container" style="display: inline-block;">
+                <h2 class="i-heading">Онлайн-издание "Караван"</h2>
+                <h4 class="i-heading">Караван офигительных историй на каждый день</h4>
+            </div>
+        </div>
+        <div class="w3-container">
+            <a class="w3-btn w3-white" href="{{root_loc}}/">Трави!</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/add/">Добавить свой контент</a></button>
+            <a class="w3-btn w3-white" href="{{root_loc}}/api/">Открытый API</a></button>
+        </div>
+        <div class="w3-container w3-white w3-margin">
+            <p>
+                <span id="story-text" class="linebreaks">{{story_text}}</span>
+            </p>
+        </div>
+        <footer class="w3-container">
+            <p>by <a href="http://vk.com/arthur_khazbs" target="_blank">Arthur Khazbs</a></p>
+        </footer>
+        <script type="text/javascript">
+            // Konami code easter egg
+            var audio = new Audio('/misc/great_stories.mp3');
+            var allowedKeys = {
+                37: 'left',
+                38: 'up',
+                39: 'right',
+                40: 'down',
+                65: 'a',
+                66: 'b'
+            };
+            var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a'];
+            var konamiCodePosition = 0;
+            document.addEventListener('keydown', function(e) {
+                var key = allowedKeys[e.keyCode];
+                var requiredKey = konamiCode[konamiCodePosition];
+                if (key == requiredKey) {
+                    konamiCodePosition++;
+                    if (konamiCodePosition == konamiCode.length) {
+                        konamiCodePosition = 0;
+                        activateCheats();
+                    }
+                } else
+                    konamiCodePosition = 0;
+            });
+            function activateCheats() {
+                document.getElementById("epifan-logo").setAttribute("src", "/misc/bored-epifan.png");
+                audio.play();
+            }
+        </script>
+    </body>
+</html>
